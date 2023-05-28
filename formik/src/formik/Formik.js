@@ -43,21 +43,22 @@ const SignupForm = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit} className='form form-floating'>
+   <div className='container'>
+     <form onSubmit={formik.handleSubmit} className='form form-floating'>
         <div className='m-2'>
         <label className='form-label' htmlFor='firstname'>FirstName:</label>
         <input className='form-control' id='firstname' name='firstname'
         value={formik.values.firstname} onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         />
-        {formik.errors.firstname ?<div className='text text-danger'>{formik.errors.firstname}</div> :null }
+        { formik.touched.firstname && formik.errors.firstname ?<div className='text text-danger'>{formik.errors.firstname}</div> :null }
       </div>
       <div className='m-2'>
         <label className='form-label' htmlFor='lastname'>LastName:</label>
         <input className='form-control' id='lastname ' name="lastname"
         value={formik.values.lastname} onChange={formik.handleChange} 
         onBlur={formik.handleBlur} />
-        { formik.errors.lastname ? <div className='text text-danger'>{formik.errors.lastname}</div> : null }
+        { formik.touched.lastname &&  formik.errors.lastname ? <div className='text text-danger'>{formik.errors.lastname}</div> : null }
         </div>
       <div className='m-2'>
       <label className='form-label' htmlFor="email">Email Address</label>
@@ -69,7 +70,7 @@ const SignupForm = () => {
         onChange={formik.handleChange}
         value={formik.values.email}
       />
-      { formik.errors.email ? <div className='text text-danger'>{formik.errors.email}</div> : null }
+      { formik.touched.email && formik.errors.email ? <div className='text text-danger'>{formik.errors.email}</div> : null }
       </div>
       <div className='m-2'>
         <label className='form-label' htmlFor='password'>Password:</label>
@@ -77,11 +78,13 @@ const SignupForm = () => {
         value={formik.values.password} onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         />
-        { formik.errors.password ? <div className='text text-danger'>{formik.errors.password}</div> : null }
+      { formik.touched.password &&formik.errors.password ? <div className='text text-danger'>{formik.errors.password}</div> : null }
       </div>
       
   <button className='btn btn-primary' type="submit">Submit</button>
+  <button className='btn btn-danger' onClick={formik.handleReset} >Reset</button>
     </form>
+   </div>
   );
 };
 export  default SignupForm
